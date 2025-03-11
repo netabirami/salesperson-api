@@ -91,9 +91,6 @@ public class SalesPersonController {
         // Return a response with a success message
         return ResponseEntity.ok("SalesPerson with ID " + id + " has been deleted successfully.");
     }
-
-
-
 }
 
 
