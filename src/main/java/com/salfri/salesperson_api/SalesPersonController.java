@@ -1,6 +1,7 @@
 package com.salfri.salesperson_api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
@@ -45,14 +46,14 @@ public class SalesPersonController {
     }
 
     @PostMapping("")
-
-    public Integer createSalesPerson(@RequestBody SalesPersonDto salesPersonDto) {
+    public ResponseEntity <SalesPersonCreateResponse> createSalesPerson(@RequestBody SalesPersonDto salesPersonDto) {
         SalesPersonEntity salesPersonEntity = new SalesPersonEntity();
         salesPersonEntity.setName(salesPersonDto.getName());
         salesPersonEntity.setLocation(salesPersonDto.getLocation());
         salesPersonEntity.setRole(salesPersonDto.getRole());
         salesPersonEntity.setEmail(salesPersonDto.getEmail());
-        return salesPersonRepository.save(salesPersonEntity).getId();
+        Integer id = salesPersonRepository.save(salesPersonEntity).getId();
+        return ResponseEntity.status(HttpStatus.CREATED).body(new SalesPersonCreateResponse(id));
     }
 
     @PutMapping("/{id}")

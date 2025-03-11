@@ -16,13 +16,13 @@
             RestAssured.baseURI = "http://localhost:8080/sales";
 
             // Step 1: Create a new Salesperson via POST
-            String requestBody = "{\"name\":\"Abi\", \"location\":\"CHENNAI\", \"role\":\"SOFTWARE_QA_ENGINEER\"}";
+            String requestBody = "{\"name\":\"Abi\", \"location\":\"CHENNAI\", \"role\":\"SOFTWARE_QA_ENGINEER\",\"email\": \"updatedemail@example.com\"}";
 
             Response postResponse = given()
                     .header("Content-Type", "application/json")
                     .body(requestBody)
                     .when()
-                    .post("/")
+                    .post("")
                     .then()
                     .statusCode(201) // Assert HTTP status for successful creation
                     .extract().response();
