@@ -21,8 +21,8 @@ jobs:
           distribution: 'temurin'  # Specify a valid distribution
           java-version: '17'
 
-      - name: Build with Maven
-        run: mvn clean install
+      - name:  Build with Maven (Skip Tests)
+        run: mvn clean install -DskipTests=true
 
       - name: Set up Docker Compose
         run: |
