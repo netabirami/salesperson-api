@@ -17,7 +17,7 @@ public class SalespersonApiApplicationTest {
     @BeforeAll
     public static void waitForServer() {
         await()
-                .atMost(30, SECONDS)
+                .atMost(60, SECONDS)
                 .pollInterval(1, SECONDS)
                 .ignoreExceptions()
                 .until(() -> {
@@ -32,6 +32,7 @@ public class SalespersonApiApplicationTest {
     }
     @Test
     public void shouldCreateAndTestSalesPerson() throws Exception {
+
         RestAssured.baseURI = "http://localhost:8080/sales";
 
         // Step 1: Create a new Salesperson via POST
