@@ -3,13 +3,33 @@ package com.salfri.salesperson_api;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import io.restassured.RestAssured;
+import org.springframework.http.HttpStatus;
 
 import static io.restassured.RestAssured.given;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SalespersonApiApplicationTest {
+    @BeforeAll
+    public static void waitForServer() {
+        await()
+                .atMost(30, SECONDS)
+                .pollInterval(1, SECONDS)
+                .ignoreExceptions()
+                .until(() -> {
+                    int statusCode = given()
+                            .when()
+                            .get("http://localhost:8080/actuator/health")
+                            .then()
+                            .extract()
+                            .statusCode();
+                    return statusCode == HttpStatus.OK.value();
+                });
+    }
     @Test
     public void shouldCreateAndTestSalesPerson() throws Exception {
         RestAssured.baseURI = "http://localhost:8080/sales";
