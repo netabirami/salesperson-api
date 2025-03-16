@@ -34,3 +34,11 @@ jobs:
 
       - name: Shut down Docker Compose
         run: docker compose down
+
+      - name: Deploy to Render
+        if: github.ref == 'refs/heads/master' && success()
+        env:
+            DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          echo "Triggering salesperson-api deployment to Render (cloud deployment)..."
+          curl -X POST "$DEPLOY_HOOK_URL"
