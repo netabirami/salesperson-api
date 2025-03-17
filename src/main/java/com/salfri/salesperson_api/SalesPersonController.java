@@ -15,7 +15,7 @@ public class SalesPersonController {
     public SalesPersonController() {}
 
     // GET all salespeople
-    @GetMappingVinoth
+    @GetMapping
     public Collection<SalesPerson> getAllSalespeople() {
         List<SalesPersonEntity> salesPersonEntities = salesPersonRepository.findAll();
         List<SalesPerson> salesPersons = new ArrayList<>();
