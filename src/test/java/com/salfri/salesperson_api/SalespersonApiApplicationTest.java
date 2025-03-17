@@ -33,7 +33,7 @@ public class SalespersonApiApplicationTest {
     @Test
     public void shouldCreateAndTestSalesPerson() throws Exception {
 
-        RestAssured.baseURI = "http://localhost:8080/sales";
+        RestAssured.baseURI = "http://localhost:8080/sales-api";
 
         // Step 1: Create a new Salesperson via POST
         String requestBody = "{\"name\":\"Abi\", " +
