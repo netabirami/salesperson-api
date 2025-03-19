@@ -45,7 +45,7 @@ public class SalesPersonController {
                 salesPersonEntity.getEmail());
     }
 
-    @PostMapping("sales")
+    @PostMapping("")
     public ResponseEntity <SalesPersonCreateResponse> createSalesPerson(@RequestBody SalesPersonDto salesPersonDto) {
         SalesPersonEntity salesPersonEntity = new SalesPersonEntity();
         salesPersonEntity.setName(salesPersonDto.getName());
