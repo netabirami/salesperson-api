@@ -1,5 +1,10 @@
 package com.salfri.salesperson_api;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class SalesPerson {
     private final int id;
     private final String name;
@@ -7,10 +12,6 @@ public class SalesPerson {
     private final String role;
     private final String email;
 
-
-    public String getRole() {
-        return role;
-    }
 
     public SalesPerson(int id, String name, String location, String role, String email) {
         this.id = id;
@@ -20,18 +21,4 @@ public class SalesPerson {
         this.email = email;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public String getEmail() {return email;
-    }
 }
