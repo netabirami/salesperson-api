@@ -25,7 +25,8 @@ public class SalesPersonController {
                     salesPersonEntity.getName(),
                     salesPersonEntity.getLocation(),
                     salesPersonEntity.getRole(),
-                    salesPersonEntity.getEmail());
+                    salesPersonEntity.getEmail(),
+                    salesPersonEntity.getMobileNumber());
             salesPersons.add(salesPerson);
         }
         return salesPersons;
@@ -42,7 +43,8 @@ public class SalesPersonController {
                 salesPersonEntity.getName(),
                 salesPersonEntity.getLocation(),
                 salesPersonEntity.getRole(),
-                salesPersonEntity.getEmail());
+                salesPersonEntity.getEmail(),
+                salesPersonEntity.getMobileNumber());
     }
 
     @PostMapping("")
@@ -52,6 +54,7 @@ public class SalesPersonController {
         salesPersonEntity.setLocation(salesPersonDto.getLocation());
         salesPersonEntity.setRole(salesPersonDto.getRole());
         salesPersonEntity.setEmail(salesPersonDto.getEmail());
+        salesPersonEntity.setMobileNumber(salesPersonDto.getMobileNumber());
         Integer id = salesPersonRepository.save(salesPersonEntity).getId();
         return ResponseEntity.status(HttpStatus.CREATED).body(new SalesPersonCreateResponse(id));
     }
@@ -67,6 +70,7 @@ public class SalesPersonController {
         salesPersonEntity.setLocation(salesPersonDto.getLocation());
         salesPersonEntity.setRole(salesPersonDto.getRole());
         salesPersonEntity.setEmail(salesPersonDto.getEmail());
+        salesPersonEntity.setMobileNumber(salesPersonDto.getMobileNumber());
 
         // Save updated entity
         salesPersonEntity = salesPersonRepository.save(salesPersonEntity);
@@ -77,8 +81,8 @@ public class SalesPersonController {
                 salesPersonEntity.getName(),
                 salesPersonEntity.getLocation(),
                 salesPersonEntity.getRole(),
-                salesPersonEntity.getEmail()
-        );
+                salesPersonEntity.getEmail(),
+                salesPersonEntity.getMobileNumber());
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteSalesPerson(@PathVariable int id) {

@@ -12,7 +12,7 @@ public class SalesPerson {
         return role;
     }
 
-    public SalesPerson(int id, String name, String location, String role, String email) {
+    public SalesPerson(int id, String name, String location, String role, String email, String mobileNumber) {
         this.id = id;
         this.name = name;
         this.location = location;

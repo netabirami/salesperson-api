@@ -38,7 +38,7 @@ public class SalespersonApiApplicationTest {
         // Step 1: Create a new Salesperson via POST
         String requestBody = "{\"name\":\"Abi\", " +
                 "\"location\":\"CHENNAI\", " +
-                "\"role\":\"SOFTWARE_QA_ENGINEER\",\"email\": \"updatedemail@example.com\"}";
+                "\"role\":\"SOFTWARE_QA_ENGINEER\",\"email\": \"updatedemail@example.com\",\"mobileNumber\":\"9876543210\"}";
 
         Response postResponse = given()
                 .header("Content-Type", "application/json")
@@ -71,11 +71,16 @@ public class SalespersonApiApplicationTest {
         String name = getJsonNode.get("name").asText();
         String location = getJsonNode.get("location").asText();
         String role = getJsonNode.get("role").asText();
+        String email = getJsonNode.get("email").asText();
+        String mobileNumber = getJsonNode.get("9876543210").asText();
 
         assertEquals(createdId, id);
         assertEquals("Abi", name);
         assertEquals("CHENNAI", location);
         assertEquals("SOFTWARE_QA_ENGINEER", role);
+        assertEquals("updatedemail@example.com",email);
+        assertEquals("9876543210",mobileNumber);
+
 
         // Step 3: Send DELETE request to remove the created Salesperson
         given()
