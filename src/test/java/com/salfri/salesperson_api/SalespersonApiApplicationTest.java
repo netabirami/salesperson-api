@@ -72,7 +72,7 @@ public class SalespersonApiApplicationTest {
         String location = getJsonNode.get("location").asText();
         String role = getJsonNode.get("role").asText();
         String email = getJsonNode.get("email").asText();
-        String mobileNumber = getJsonNode.get("9876543210").asText();
+        String mobileNumber = getJsonNode.get("mobileNumber").asText();
 
         assertEquals(createdId, id);
         assertEquals("Abi", name);

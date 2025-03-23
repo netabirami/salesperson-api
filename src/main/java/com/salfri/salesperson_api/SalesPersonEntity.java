@@ -28,7 +28,7 @@ public class SalesPersonEntity {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "mobileNumber", nullable = false)
+    @Column(name = "mobile_number", nullable = false)
     private String mobileNumber;
 
 }
