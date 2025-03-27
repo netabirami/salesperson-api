@@ -1,7 +1,6 @@
 package com.salfri.salesperson_api;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,5 +29,8 @@ public class SalesPersonEntity {
 
     @Column(name = "mobile_number", nullable = false)
     private String mobileNumber;
+
+    @Column(name = "total_sales_count", nullable = false)
+    private int totalSalesCount;
 
 }

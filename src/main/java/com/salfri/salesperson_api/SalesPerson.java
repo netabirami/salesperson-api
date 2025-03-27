@@ -3,6 +3,7 @@ package com.salfri.salesperson_api;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 public class SalesPerson {
@@ -12,38 +13,19 @@ public class SalesPerson {
     private final String role;
     private final String email;
     private final String mobileNumber ;
+    private final int totalSalesCount;
 
 
-
-    public String getRole() {
-        return role;
-    }
-
-    public SalesPerson(int id, String name, String location, String role, String email, String mobileNumber) {
+    public SalesPerson(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount) {
         this.id = id;
         this.name = name;
         this.location = location;
         this.role = role;
         this.email = email;
         this.mobileNumber= mobileNumber;
+        this.totalSalesCount = totalSalesCount;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public String getEmail()
-    {return email;
-    }
-
-    public String getMobileNumber()
-    {return mobileNumber;}
 }
+
+
