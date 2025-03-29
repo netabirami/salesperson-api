@@ -27,7 +27,8 @@ public class SalesPersonController {
                     salesPersonEntity.getRole(),
                     salesPersonEntity.getEmail(),
                     salesPersonEntity.getMobileNumber(),
-                    salesPersonEntity.getTotalSalesCount());
+                    salesPersonEntity.getTotalSalesCount(),
+                    salesPersonEntity.getJoiningDate());
             salesPersons.add(salesPerson);
         }
         return salesPersons;
@@ -46,7 +47,8 @@ public class SalesPersonController {
                 salesPersonEntity.getRole(),
                 salesPersonEntity.getEmail(),
                 salesPersonEntity.getMobileNumber(),
-                salesPersonEntity.getTotalSalesCount());
+                salesPersonEntity.getTotalSalesCount(),
+                salesPersonEntity.getJoiningDate());
     }
 
     @PostMapping("")
@@ -58,6 +60,7 @@ public class SalesPersonController {
         salesPersonEntity.setEmail(salesPersonDto.getEmail());
         salesPersonEntity.setMobileNumber(salesPersonDto.getMobileNumber());
         salesPersonEntity.setTotalSalesCount(salesPersonDto.getTotalSalesCount());
+        salesPersonEntity.setJoiningDate(salesPersonDto.getJoiningDate());
         Integer id = salesPersonRepository.save(salesPersonEntity).getId();
         return ResponseEntity.status(HttpStatus.CREATED).body(new SalesPersonCreateResponse(id));
     }
@@ -75,6 +78,7 @@ public class SalesPersonController {
         salesPersonEntity.setEmail(salesPersonDto.getEmail());
         salesPersonEntity.setMobileNumber(salesPersonDto.getMobileNumber());
         salesPersonEntity.setTotalSalesCount(salesPersonDto.getTotalSalesCount());
+        salesPersonEntity.setJoiningDate(salesPersonDto.getJoiningDate());
 
         // Save updated entity
         salesPersonEntity = salesPersonRepository.save(salesPersonEntity);
@@ -87,7 +91,8 @@ public class SalesPersonController {
                 salesPersonEntity.getRole(),
                 salesPersonEntity.getEmail(),
                 salesPersonEntity.getMobileNumber(),
-                salesPersonEntity.getTotalSalesCount());
+                salesPersonEntity.getTotalSalesCount(),
+                salesPersonEntity.getJoiningDate());
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteSalesPerson(@PathVariable int id) {

@@ -2,6 +2,9 @@ package com.salfri.salesperson_api;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -13,8 +16,10 @@ public class SalesPersonDto {
     private final String email;
     private final String mobileNumber;
     private final int totalSalesCount;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private final LocalDate joiningDate;
 
-    public SalesPersonDto(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount) {
+    public SalesPersonDto(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -22,6 +27,7 @@ public class SalesPersonDto {
         this.email = email;
         this.mobileNumber = mobileNumber;
        this.totalSalesCount = totalSalesCount;
+        this.joiningDate = joiningDate;
     }
 
 }

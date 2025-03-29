@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,5 +34,8 @@ public class SalesPersonEntity {
 
     @Column(name = "total_sales_count", nullable = false)
     private int totalSalesCount;
+
+    @Column(name = "joiningDate")
+    private LocalDate joiningDate;
 
 }

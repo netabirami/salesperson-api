@@ -1,0 +1,2 @@
+ALTER TABLE sales_person
+ADD COLUMN joining_date DATE DEFAULT NULL;
