@@ -38,4 +38,9 @@ public class SalesPersonEntity {
     @Column(name = "joiningDate")
     private LocalDate joiningDate;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private Status status = Status.ACTIVE; // Default to ACTIVE
+
+
 }

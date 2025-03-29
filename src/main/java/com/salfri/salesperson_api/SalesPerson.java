@@ -17,9 +17,10 @@ public class SalesPerson {
     private final String mobileNumber ;
     private final int totalSalesCount;
     private final LocalDate joiningDate;
+    private final Status status;
 
 
-    public SalesPerson(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate) {
+    public SalesPerson(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate, Status status) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -28,6 +29,7 @@ public class SalesPerson {
         this.mobileNumber= mobileNumber;
         this.totalSalesCount = totalSalesCount;
         this.joiningDate = joiningDate;
+        this.status = status;
     }
 
 }

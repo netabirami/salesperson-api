@@ -18,8 +18,9 @@ public class SalesPersonDto {
     private final int totalSalesCount;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private final LocalDate joiningDate;
+    private final Status status;
 
-    public SalesPersonDto(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate) {
+    public SalesPersonDto(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate, Status status) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -28,6 +29,7 @@ public class SalesPersonDto {
         this.mobileNumber = mobileNumber;
        this.totalSalesCount = totalSalesCount;
         this.joiningDate = joiningDate;
+        this.status = status;
     }
 
 }
