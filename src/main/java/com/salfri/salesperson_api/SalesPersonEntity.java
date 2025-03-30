@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
@@ -41,6 +42,10 @@ public class SalesPersonEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status = Status.ACTIVE; // Default to ACTIVE
+
+    @Column(name = "total_revenue", nullable = false)
+    private BigDecimal totalRevenue = BigDecimal.ZERO;
+
 
 
 }

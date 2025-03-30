@@ -1,0 +1,1 @@
+ALTER TABLE sales_person ADD COLUMN total_revenue DECIMAL(15,2) DEFAULT 0.00 NOT NULL;

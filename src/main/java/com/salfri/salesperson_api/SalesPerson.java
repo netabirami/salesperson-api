@@ -3,6 +3,7 @@ package com.salfri.salesperson_api;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 
@@ -18,9 +19,10 @@ public class SalesPerson {
     private final int totalSalesCount;
     private final LocalDate joiningDate;
     private final Status status;
+    private final BigDecimal totalRevenue;
 
 
-    public SalesPerson(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate, Status status) {
+    public SalesPerson(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate, Status status, BigDecimal totalRevenue) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -30,6 +32,7 @@ public class SalesPerson {
         this.totalSalesCount = totalSalesCount;
         this.joiningDate = joiningDate;
         this.status = status;
+        this.totalRevenue = totalRevenue;
     }
 
 }

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import io.restassured.RestAssured;
 import org.springframework.http.HttpStatus;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import static io.restassured.RestAssured.given;
@@ -40,7 +41,8 @@ public class SalespersonApiApplicationTest {
         // Step 1: Create a new Salesperson via POST
         String requestBody = "{\"name\":\"Abi\", " +
                 "\"location\":\"CHENNAI\", " +
-                "\"role\":\"SOFTWARE_QA_ENGINEER\",\"email\": \"updatedemail@example.com\",\"mobileNumber\":\"9876543210\",\"totalSalesCount\":100,\"joiningDate\":\"2025-01-12\",\"status\":\"ACTIVE\"}";
+                "\"role\":\"SOFTWARE_QA_ENGINEER\",\"email\": \"updatedemail@example.com\",\"mobileNumber\":\"9876543210\",\"totalSalesCount\":100,\"joiningDate\":\"2025-01-12\"," +
+                "\"status\":\"ACTIVE\",\"totalRevenue\": 100000.75}";
 
         Response postResponse = given()
                 .header("Content-Type", "application/json")
@@ -78,6 +80,8 @@ public class SalespersonApiApplicationTest {
         int totalSalesCount = getJsonNode.get("totalSalesCount").asInt();
         String joiningDate = getJsonNode.get("joiningDate").asText();
         String status = getJsonNode.get("status").asText();
+        BigDecimal totalRevenue = BigDecimal.valueOf(getJsonNode.get("totalRevenue").asDouble());
+
 
         assertEquals(createdId, id);
         assertEquals("Abi", name);
@@ -88,6 +92,8 @@ public class SalespersonApiApplicationTest {
         assertEquals(100,totalSalesCount);
         assertEquals("2025-01-12",joiningDate);
         assertEquals("ACTIVE",status);
+        assertEquals(BigDecimal.valueOf(100000.75), totalRevenue);
+
 
 
         // Step 3: Send DELETE request to remove the created Salesperson

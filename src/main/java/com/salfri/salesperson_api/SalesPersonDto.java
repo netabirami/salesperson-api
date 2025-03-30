@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
@@ -19,8 +20,9 @@ public class SalesPersonDto {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private final LocalDate joiningDate;
     private final Status status;
+    protected final BigDecimal totalRevenue;
 
-    public SalesPersonDto(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate, Status status) {
+    public SalesPersonDto(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate, Status status, BigDecimal totalRevenue) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -30,6 +32,7 @@ public class SalesPersonDto {
        this.totalSalesCount = totalSalesCount;
         this.joiningDate = joiningDate;
         this.status = status;
+        this.totalRevenue = totalRevenue;
     }
 
 }
