@@ -22,8 +22,9 @@ public class SalesPersonDto {
     private final Status status;
     protected final BigDecimal totalRevenue;
     private final String departmentName;
+    private final String designation;
 
-    public SalesPersonDto(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate, Status status, BigDecimal totalRevenue, String departmentName) {
+    public SalesPersonDto(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate, Status status, BigDecimal totalRevenue, String departmentName, String designation) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -35,6 +36,7 @@ public class SalesPersonDto {
         this.status = status;
         this.totalRevenue = totalRevenue;
         this.departmentName = departmentName;
+        this.designation = designation;
     }
 
 }

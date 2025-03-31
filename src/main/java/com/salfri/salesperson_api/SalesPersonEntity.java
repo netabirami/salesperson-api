@@ -49,6 +49,9 @@ public class SalesPersonEntity {
     @Column(name = "department_name",nullable = false)
     private String departmentName;
 
+    @Column(name="designation", nullable = false)
+    private String designation;
+
 
 
 }

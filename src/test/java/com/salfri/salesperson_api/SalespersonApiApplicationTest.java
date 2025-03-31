@@ -43,7 +43,7 @@ public class SalespersonApiApplicationTest {
         String requestBody = "{\"name\":\"Abi\", " +
                 "\"location\":\"CHENNAI\", " +
                 "\"role\":\"SOFTWARE_QA_ENGINEER\",\"email\": \"updatedemail@example.com\",\"mobileNumber\":\"9876543210\",\"totalSalesCount\":100,\"joiningDate\":\"2025-01-12\"," +
-                "\"status\":\"ACTIVE\",\"totalRevenue\": 100000.75 ,\"departmentName\": \"General\"}";
+                "\"status\":\"ACTIVE\",\"totalRevenue\": 100000.75 ,\"departmentName\": \"General\",\"designation\": \"Sales Executive\"}";
 
         Response postResponse = given()
                 .header("Content-Type", "application/json")
@@ -83,6 +83,7 @@ public class SalespersonApiApplicationTest {
         String status = getJsonNode.get("status").asText();
         BigDecimal totalRevenue = BigDecimal.valueOf(getJsonNode.get("totalRevenue").asDouble());
         String departmentName = getJsonNode.get("departmentName").asText();
+        String designation = getJsonNode.get("designation").asText();
 
 
         assertEquals(createdId, id);
@@ -96,6 +97,7 @@ public class SalespersonApiApplicationTest {
         assertEquals("ACTIVE",status);
         assertEquals(BigDecimal.valueOf(100000.75), totalRevenue);
         assertEquals("General",departmentName);
+        assertEquals("Sales Executive",designation);
 
 
 

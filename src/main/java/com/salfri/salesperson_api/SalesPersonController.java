@@ -31,7 +31,8 @@ public class SalesPersonController {
                     salesPersonEntity.getJoiningDate(),
                     salesPersonEntity.getStatus(),
                     salesPersonEntity.getTotalRevenue(),
-                    salesPersonEntity.getDepartmentName());
+                    salesPersonEntity.getDepartmentName(),
+                    salesPersonEntity.getDesignation());
             salesPersons.add(salesPerson);
         }
         return salesPersons;
@@ -54,7 +55,8 @@ public class SalesPersonController {
                 salesPersonEntity.getJoiningDate(),
                 salesPersonEntity.getStatus(),
                 salesPersonEntity.getTotalRevenue(),
-                salesPersonEntity.getDepartmentName());
+                salesPersonEntity.getDepartmentName(),
+                salesPersonEntity.getDesignation());
     }
 
     @PostMapping("")
@@ -70,6 +72,7 @@ public class SalesPersonController {
         salesPersonEntity.setStatus(salesPersonDto.getStatus());
         salesPersonEntity.setTotalRevenue(salesPersonDto.getTotalRevenue());
         salesPersonEntity.setDepartmentName(salesPersonDto.getDepartmentName());
+        salesPersonEntity.setDesignation(salesPersonDto.getDesignation());
         Integer id = salesPersonRepository.save(salesPersonEntity).getId();
         return ResponseEntity.status(HttpStatus.CREATED).body(new SalesPersonCreateResponse(id));
     }
@@ -91,6 +94,7 @@ public class SalesPersonController {
         salesPersonEntity.setStatus(salesPersonDto.getStatus());
         salesPersonEntity.setTotalRevenue(salesPersonDto.getTotalRevenue());
         salesPersonEntity.setDepartmentName(salesPersonDto.getDepartmentName());
+        salesPersonEntity.setDesignation(salesPersonDto.getDesignation());
 
         // Save updated entity
         salesPersonEntity = salesPersonRepository.save(salesPersonEntity);
@@ -107,7 +111,8 @@ public class SalesPersonController {
                 salesPersonEntity.getJoiningDate(),
                 salesPersonEntity.getStatus(),
                 salesPersonEntity.getTotalRevenue(),
-                salesPersonEntity.getDepartmentName());
+                salesPersonEntity.getDepartmentName(),
+                salesPersonEntity.getDesignation());
 
     }
     @DeleteMapping("/{id}")
