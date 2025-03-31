@@ -2,6 +2,7 @@ package com.salfri.salesperson_api;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -42,7 +43,7 @@ public class SalespersonApiApplicationTest {
         String requestBody = "{\"name\":\"Abi\", " +
                 "\"location\":\"CHENNAI\", " +
                 "\"role\":\"SOFTWARE_QA_ENGINEER\",\"email\": \"updatedemail@example.com\",\"mobileNumber\":\"9876543210\",\"totalSalesCount\":100,\"joiningDate\":\"2025-01-12\"," +
-                "\"status\":\"ACTIVE\",\"totalRevenue\": 100000.75}";
+                "\"status\":\"ACTIVE\",\"totalRevenue\": 100000.75 ,\"departmentName\": \"General\"}";
 
         Response postResponse = given()
                 .header("Content-Type", "application/json")
@@ -81,6 +82,7 @@ public class SalespersonApiApplicationTest {
         String joiningDate = getJsonNode.get("joiningDate").asText();
         String status = getJsonNode.get("status").asText();
         BigDecimal totalRevenue = BigDecimal.valueOf(getJsonNode.get("totalRevenue").asDouble());
+        String departmentName = getJsonNode.get("departmentName").asText();
 
 
         assertEquals(createdId, id);
@@ -93,6 +95,7 @@ public class SalespersonApiApplicationTest {
         assertEquals("2025-01-12",joiningDate);
         assertEquals("ACTIVE",status);
         assertEquals(BigDecimal.valueOf(100000.75), totalRevenue);
+        assertEquals("General",departmentName);
 
 
 
