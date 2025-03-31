@@ -30,7 +30,8 @@ public class SalesPersonController {
                     salesPersonEntity.getTotalSalesCount(),
                     salesPersonEntity.getJoiningDate(),
                     salesPersonEntity.getStatus(),
-                    salesPersonEntity.getTotalRevenue());
+                    salesPersonEntity.getTotalRevenue(),
+                    salesPersonEntity.getDepartmentName());
             salesPersons.add(salesPerson);
         }
         return salesPersons;
@@ -52,7 +53,8 @@ public class SalesPersonController {
                 salesPersonEntity.getTotalSalesCount(),
                 salesPersonEntity.getJoiningDate(),
                 salesPersonEntity.getStatus(),
-                salesPersonEntity.getTotalRevenue());
+                salesPersonEntity.getTotalRevenue(),
+                salesPersonEntity.getDepartmentName());
     }
 
     @PostMapping("")
@@ -67,6 +69,7 @@ public class SalesPersonController {
         salesPersonEntity.setJoiningDate(salesPersonDto.getJoiningDate());
         salesPersonEntity.setStatus(salesPersonDto.getStatus());
         salesPersonEntity.setTotalRevenue(salesPersonDto.getTotalRevenue());
+        salesPersonEntity.setDepartmentName(salesPersonDto.getDepartmentName());
         Integer id = salesPersonRepository.save(salesPersonEntity).getId();
         return ResponseEntity.status(HttpStatus.CREATED).body(new SalesPersonCreateResponse(id));
     }
@@ -85,8 +88,9 @@ public class SalesPersonController {
         salesPersonEntity.setMobileNumber(salesPersonDto.getMobileNumber());
         salesPersonEntity.setTotalSalesCount(salesPersonDto.getTotalSalesCount());
         salesPersonEntity.setJoiningDate(salesPersonDto.getJoiningDate());
-        salesPersonEntity.setStatus(salesPersonEntity.getStatus());
+        salesPersonEntity.setStatus(salesPersonDto.getStatus());
         salesPersonEntity.setTotalRevenue(salesPersonDto.getTotalRevenue());
+        salesPersonEntity.setDepartmentName(salesPersonDto.getDepartmentName());
 
         // Save updated entity
         salesPersonEntity = salesPersonRepository.save(salesPersonEntity);
@@ -102,7 +106,8 @@ public class SalesPersonController {
                 salesPersonEntity.getTotalSalesCount(),
                 salesPersonEntity.getJoiningDate(),
                 salesPersonEntity.getStatus(),
-                salesPersonEntity.getTotalRevenue());
+                salesPersonEntity.getTotalRevenue(),
+                salesPersonEntity.getDepartmentName());
 
     }
     @DeleteMapping("/{id}")

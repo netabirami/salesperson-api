@@ -46,6 +46,9 @@ public class SalesPersonEntity {
     @Column(name = "total_revenue", nullable = false)
     private BigDecimal totalRevenue = BigDecimal.ZERO;
 
+    @Column(name = "department_name",nullable = false)
+    private String departmentName;
+
 
 
 }
