@@ -43,7 +43,7 @@ public class SalespersonApiApplicationTest {
         String requestBody = "{\"name\":\"Abi\", " +
                 "\"location\":\"CHENNAI\", " +
                 "\"role\":\"SOFTWARE_QA_ENGINEER\",\"email\": \"updatedemail@example.com\",\"mobileNumber\":\"9876543210\",\"totalSalesCount\":100,\"joiningDate\":\"2025-01-12\"," +
-                "\"status\":\"ACTIVE\",\"totalRevenue\": 100000.75 ,\"departmentName\": \"General\",\"designation\": \"Sales Executive\"}";
+                "\"status\":\"ACTIVE\",\"totalRevenue\": 100000.75 ,\"departmentName\": \"General\",\"designation\": \"Sales Executive\",\"performanceRating\":4}";
 
         Response postResponse = given()
                 .header("Content-Type", "application/json")
@@ -84,6 +84,7 @@ public class SalespersonApiApplicationTest {
         BigDecimal totalRevenue = BigDecimal.valueOf(getJsonNode.get("totalRevenue").asDouble());
         String departmentName = getJsonNode.get("departmentName").asText();
         String designation = getJsonNode.get("designation").asText();
+        Integer performanceRating = getJsonNode.get("performanceRating").asInt();
 
 
         assertEquals(createdId, id);
@@ -98,6 +99,7 @@ public class SalespersonApiApplicationTest {
         assertEquals(BigDecimal.valueOf(100000.75), totalRevenue);
         assertEquals("General",departmentName);
         assertEquals("Sales Executive",designation);
+        assertEquals(4,performanceRating);
 
 
 

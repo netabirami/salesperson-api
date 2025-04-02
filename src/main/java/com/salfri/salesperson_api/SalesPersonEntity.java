@@ -52,6 +52,9 @@ public class SalesPersonEntity {
     @Column(name="designation", nullable = false)
     private String designation;
 
+    @Column(name = "performance_rating", nullable = false)
+    private Integer performanceRating ;
+
 
 
 }

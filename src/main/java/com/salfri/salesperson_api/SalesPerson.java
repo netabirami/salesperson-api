@@ -22,9 +22,10 @@ public class SalesPerson {
     private final BigDecimal totalRevenue;
     private final String departmentName;
     private final String designation;
+    private final Integer performanceRating;
 
 
-    public SalesPerson(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate, Status status, BigDecimal totalRevenue, String departmentName, String designation) {
+    public SalesPerson(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate, Status status, BigDecimal totalRevenue, String departmentName, String designation, Integer performanceRating) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -37,6 +38,7 @@ public class SalesPerson {
         this.totalRevenue = totalRevenue;
         this.departmentName = departmentName;
         this.designation = designation;
+        this.performanceRating = performanceRating;
     }
 
 }

@@ -32,7 +32,8 @@ public class SalesPersonController {
                     salesPersonEntity.getStatus(),
                     salesPersonEntity.getTotalRevenue(),
                     salesPersonEntity.getDepartmentName(),
-                    salesPersonEntity.getDesignation());
+                    salesPersonEntity.getDesignation(),
+                    salesPersonEntity.getPerformanceRating());
             salesPersons.add(salesPerson);
         }
         return salesPersons;
@@ -56,11 +57,12 @@ public class SalesPersonController {
                 salesPersonEntity.getStatus(),
                 salesPersonEntity.getTotalRevenue(),
                 salesPersonEntity.getDepartmentName(),
-                salesPersonEntity.getDesignation());
+                salesPersonEntity.getDesignation(),
+                salesPersonEntity.getPerformanceRating());
     }
 
     @PostMapping("")
-    public ResponseEntity <SalesPersonCreateResponse> createSalesPerson(@RequestBody SalesPersonDto salesPersonDto) {
+    public ResponseEntity <SalesPersonCreateResponse> createSalesPerson(@RequestBody SalesPersonDto salesPersonDto ) {
         SalesPersonEntity salesPersonEntity = new SalesPersonEntity();
         salesPersonEntity.setName(salesPersonDto.getName());
         salesPersonEntity.setLocation(salesPersonDto.getLocation());
@@ -73,6 +75,7 @@ public class SalesPersonController {
         salesPersonEntity.setTotalRevenue(salesPersonDto.getTotalRevenue());
         salesPersonEntity.setDepartmentName(salesPersonDto.getDepartmentName());
         salesPersonEntity.setDesignation(salesPersonDto.getDesignation());
+        salesPersonEntity.setPerformanceRating(salesPersonDto.getPerformanceRating());
         Integer id = salesPersonRepository.save(salesPersonEntity).getId();
         return ResponseEntity.status(HttpStatus.CREATED).body(new SalesPersonCreateResponse(id));
     }
@@ -95,6 +98,7 @@ public class SalesPersonController {
         salesPersonEntity.setTotalRevenue(salesPersonDto.getTotalRevenue());
         salesPersonEntity.setDepartmentName(salesPersonDto.getDepartmentName());
         salesPersonEntity.setDesignation(salesPersonDto.getDesignation());
+        salesPersonEntity.setPerformanceRating(salesPersonDto.getPerformanceRating());
 
         // Save updated entity
         salesPersonEntity = salesPersonRepository.save(salesPersonEntity);
@@ -112,7 +116,8 @@ public class SalesPersonController {
                 salesPersonEntity.getStatus(),
                 salesPersonEntity.getTotalRevenue(),
                 salesPersonEntity.getDepartmentName(),
-                salesPersonEntity.getDesignation());
+                salesPersonEntity.getDesignation(),
+                salesPersonEntity.getPerformanceRating());
 
     }
     @DeleteMapping("/{id}")
