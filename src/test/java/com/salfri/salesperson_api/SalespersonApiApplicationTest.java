@@ -35,7 +35,7 @@ public class SalespersonApiApplicationTest {
                 });
     }
     @Test
-    public void shouldCreateAndTestSalesPerson() throws Exception {
+    public void shouldVerifyCreateUpdateGetApi() throws Exception {
 
         RestAssured.baseURI = "http://localhost:8080/sales";
 
@@ -101,16 +101,58 @@ public class SalespersonApiApplicationTest {
         assertEquals("Sales Executive",designation);
         assertEquals(4,performanceRating);
 
+        // Step 5: Send PUT request to update Salesperson details
+        String updatedRequestBody = "{\"name\":\"Kamachi Updated\", " +
+                "\"location\":\"Germany\", " +
+                "\"role\":\"Senior Manager\",\"email\": \"kanch_updated@gmail.com\",\"mobileNumber\":\"987654321\"," +
+                "\"totalSalesCount\":150,\"joiningDate\":\"1985-05-15\"," +
+                "\"status\":\"INACTIVE\",\"totalRevenue\": 2000000.99 ," +
+                "\"departmentName\": \"Sales\",\"designation\": \"Team Lead\",\"performanceRating\":5}";
+
+        given()
+                .header("Content-Type", "application/json")
+                .body(updatedRequestBody)
+                .when()
+                .put("/" + createdId)
+                .then()
+                .statusCode(200); // Assert HTTP status for successful update
+
+        // Step 6: Retrieve and validate the updated Salesperson details
+        Response updatedGetResponse = given()
+                .when()
+                .get("/" + createdId)
+                .then()
+                .statusCode(200)
+                .extract().response();
+
+        // Extract updated values
+        String updatedResponseBody = updatedGetResponse.getBody().asString();
+        JsonNode updatedJsonNode = objectMapper.readTree(updatedResponseBody);
+
+        assertEquals(createdId, updatedJsonNode.get("id").asInt());
+        assertEquals("Kamachi Updated", updatedJsonNode.get("name").asText());
+        assertEquals("Germany", updatedJsonNode.get("location").asText());
+        assertEquals("Senior Manager", updatedJsonNode.get("role").asText());
+        assertEquals("kanch_updated@gmail.com", updatedJsonNode.get("email").asText());
+        assertEquals("987654321", updatedJsonNode.get("mobileNumber").asText());
+        assertEquals(150, updatedJsonNode.get("totalSalesCount").asInt());
+        assertEquals("1985-05-15", updatedJsonNode.get("joiningDate").asText());
+        assertEquals("INACTIVE", updatedJsonNode.get("status").asText());
+        assertEquals(BigDecimal.valueOf(2000000.99), BigDecimal.valueOf(updatedJsonNode.get("totalRevenue").asDouble()));
+        assertEquals("Sales", updatedJsonNode.get("departmentName").asText());
+        assertEquals("Team Lead", updatedJsonNode.get("designation").asText());
+        assertEquals(5, updatedJsonNode.get("performanceRating").asInt());
 
 
-        // Step 3: Send DELETE request to remove the created Salesperson
+
+        // Step 7: Send DELETE request to remove the created Salesperson
         given()
                 .when()
                 .delete("/" + createdId)
                 .then()
                 .statusCode(204); // 204 No Content (successful deletion)
 
-        // Step 4: Try to GET the deleted Salesperson (should return 404)
+        // Step 8: Try to GET the deleted Salesperson (should return 404)
         given()
                 .when()
                 .get("/" + createdId)
