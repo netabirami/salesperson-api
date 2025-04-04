@@ -1,0 +1,4 @@
+ALTER TABLE sales_person
+ADD COLUMN gender ENUM('MALE', 'FEMALE', 'OTHER') DEFAULT 'OTHER';
+
+

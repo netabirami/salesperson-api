@@ -55,6 +55,10 @@ public class SalesPersonEntity {
     @Column(name = "performance_rating", nullable = false)
     private Integer performanceRating ;
 
+    @Enumerated(EnumType.STRING)
+    @Column (name ="gender",nullable = false)
+    private Gender gender = Gender.OTHER; //Default to Other
+
 
 
 }

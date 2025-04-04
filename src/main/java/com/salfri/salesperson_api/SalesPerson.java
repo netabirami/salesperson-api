@@ -23,9 +23,10 @@ public class SalesPerson {
     private final String departmentName;
     private final String designation;
     private final Integer performanceRating;
+    private final Gender gender;
 
 
-    public SalesPerson(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate, Status status, BigDecimal totalRevenue, String departmentName, String designation, Integer performanceRating) {
+    public SalesPerson(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate, Status status, BigDecimal totalRevenue, String departmentName, String designation, Integer performanceRating, Gender gender) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -39,6 +40,7 @@ public class SalesPerson {
         this.departmentName = departmentName;
         this.designation = designation;
         this.performanceRating = performanceRating;
+        this.gender = gender;
     }
 
 }
