@@ -25,8 +25,9 @@ public class SalesPersonDto {
     private final String designation;
     private final Integer performanceRating;
     private final Gender gender;
+    private final  String address;
 
-    public SalesPersonDto(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate, Status status, BigDecimal totalRevenue, String departmentName, String designation, Integer performanceRating, Gender gender) {
+    public SalesPersonDto(int id, String name, String location, String role, String email, String mobileNumber, int totalSalesCount, LocalDate joiningDate, Status status, BigDecimal totalRevenue, String departmentName, String designation, Integer performanceRating, Gender gender, String address) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -41,6 +42,7 @@ public class SalesPersonDto {
         this.designation = designation;
         this.performanceRating = performanceRating;
         this.gender = gender;
+        this.address = address;
     }
 
 }

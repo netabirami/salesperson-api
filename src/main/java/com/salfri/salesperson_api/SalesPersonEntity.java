@@ -59,6 +59,9 @@ public class SalesPersonEntity {
     @Column (name ="gender",nullable = false)
     private Gender gender = Gender.OTHER; //Default to Other
 
+    @Column(name = "address", nullable = false)
+    private String address ;
+
 
 
 }

@@ -43,7 +43,8 @@ public class SalespersonApiApplicationTest {
         String requestBody = "{\"name\":\"Abi\", " +
                 "\"location\":\"CHENNAI\", " +
                 "\"role\":\"SOFTWARE_QA_ENGINEER\",\"email\": \"updatedemail@example.com\",\"mobileNumber\":\"9876543210\",\"totalSalesCount\":100,\"joiningDate\":\"2025-01-12\"," +
-                "\"status\":\"ACTIVE\",\"totalRevenue\": 100000.75 ,\"departmentName\": \"General\",\"designation\": \"Sales Executive\",\"performanceRating\":4, \"gender\":\"OTHER\"}";
+                "\"status\":\"ACTIVE\",\"totalRevenue\": 100000.75 ,\"departmentName\": \"General\",\"designation\": \"Sales Executive\",\"performanceRating\":4, \"gender\":\"OTHER\", " +
+                "\"address\":\"456 New Address, Chennai, India\"}";
 
         Response postResponse = given()
                 .header("Content-Type", "application/json")
@@ -86,6 +87,7 @@ public class SalespersonApiApplicationTest {
         String designation = getJsonNode.get("designation").asText();
         Integer performanceRating = getJsonNode.get("performanceRating").asInt();
         String gender = getJsonNode.get("gender").asText();
+        String address = getJsonNode.get("address").asText();
 
 
         assertEquals(createdId, id);
@@ -102,6 +104,7 @@ public class SalespersonApiApplicationTest {
         assertEquals("Sales Executive",designation);
         assertEquals(4,performanceRating);
         assertEquals("OTHER",gender);
+        assertEquals("456 New Address, Chennai, India",address);
 
         // Step 5: Send PUT request to update Salesperson details
         String updatedRequestBody = "{\"name\":\"Kamachi Updated\", " +
@@ -109,7 +112,8 @@ public class SalespersonApiApplicationTest {
                 "\"role\":\"Senior Manager\",\"email\": \"kanch_updated@gmail.com\",\"mobileNumber\":\"987654321\"," +
                 "\"totalSalesCount\":150,\"joiningDate\":\"1985-05-15\"," +
                 "\"status\":\"INACTIVE\",\"totalRevenue\": 2000000.99 ," +
-                "\"departmentName\": \"Sales\",\"designation\": \"Team Lead\",\"performanceRating\":5,\"gender\":\"FEMALE\"}";
+                "\"departmentName\": \"Sales\",\"designation\": \"Team Lead\",\"performanceRating\":5," +
+                "\"gender\":\"FEMALE\",\"address\":\"21, Main road, Chennai, India\"}";
 
         given()
                 .header("Content-Type", "application/json")
@@ -145,6 +149,7 @@ public class SalespersonApiApplicationTest {
         assertEquals("Team Lead", updatedJsonNode.get("designation").asText());
         assertEquals(5, updatedJsonNode.get("performanceRating").asInt());
         assertEquals("FEMALE",updatedJsonNode.get("gender").asText());
+        assertEquals("21, Main road, Chennai, India",updatedJsonNode.get("address").asText());
 
 
 
