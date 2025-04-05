@@ -62,6 +62,9 @@ public class SalesPersonEntity {
     @Column(name = "address", nullable = false)
     private String address ;
 
+    @Column(name = "photo_url",nullable = false)
+    private String photoUrl ;
+
 
 
 }

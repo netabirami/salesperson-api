@@ -35,7 +35,8 @@ public class SalesPersonController {
                     salesPersonEntity.getDesignation(),
                     salesPersonEntity.getPerformanceRating(),
                     salesPersonEntity.getGender(),
-                    salesPersonEntity.getAddress());
+                    salesPersonEntity.getAddress(),
+                    salesPersonEntity.getPhotoUrl());
             salesPersons.add(salesPerson);
         }
         return salesPersons;
@@ -62,7 +63,8 @@ public class SalesPersonController {
                 salesPersonEntity.getDesignation(),
                 salesPersonEntity.getPerformanceRating(),
                 salesPersonEntity.getGender(),
-                salesPersonEntity.getAddress());
+                salesPersonEntity.getAddress(),
+                salesPersonEntity.getPhotoUrl());
     }
 
     @PostMapping("")
@@ -82,6 +84,7 @@ public class SalesPersonController {
         salesPersonEntity.setPerformanceRating(salesPersonDto.getPerformanceRating());
         salesPersonEntity.setGender(salesPersonDto.getGender());
         salesPersonEntity.setAddress(salesPersonDto.getAddress());
+        salesPersonEntity.setPhotoUrl(salesPersonDto.getPhotoUrl());
         Integer id = salesPersonRepository.save(salesPersonEntity).getId();
         return ResponseEntity.status(HttpStatus.CREATED).body(new SalesPersonCreateResponse(id));
     }
@@ -107,6 +110,7 @@ public class SalesPersonController {
         salesPersonEntity.setPerformanceRating(salesPersonDto.getPerformanceRating());
         salesPersonEntity.setGender(salesPersonDto.getGender());
         salesPersonEntity.setAddress(salesPersonDto.getAddress());
+        salesPersonEntity.setPhotoUrl(salesPersonDto.getPhotoUrl());
 
         // Save updated entity
         salesPersonEntity = salesPersonRepository.save(salesPersonEntity);
@@ -127,7 +131,8 @@ public class SalesPersonController {
                 salesPersonEntity.getDesignation(),
                 salesPersonEntity.getPerformanceRating(),
                 salesPersonEntity.getGender(),
-                salesPersonEntity.getAddress());
+                salesPersonEntity.getAddress(),
+                salesPersonEntity.getPhotoUrl());
 
     }
     @DeleteMapping("/{id}")
