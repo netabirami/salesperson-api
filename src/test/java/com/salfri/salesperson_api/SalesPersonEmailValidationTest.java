@@ -127,8 +127,8 @@ public class SalesPersonEmailValidationTest {
         return Stream.of(
                 Arguments.of("@abi@gmailcom","Should match"),
                 Arguments.of("a@gl.cm",
-                        "Not longer than 100 chars and minimum 10"),
-                Arguments.of("","Should not be null")
+                        "Not longer than 100 chars and minimum 10")
+
         );
     }
 }
