@@ -18,11 +18,16 @@ import jakarta.validation.constraints.Size;
 public class SalesPersonDto {
     private final int id;
 
-    @NotBlank(message = "Name cannot be empty")
+    @NotBlank(message = "Name cannot be Null")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     @Pattern(regexp = "^[A-Za-z ]+$", message = "Name must contain only letters and spaces")
     private final String name;
 
+    @NotBlank(message = "Location cannot be Null")
+    @Size(min = 2, max = 50, message = "Location must be between 2 and 50 characters")
+    @Pattern(regexp = "^[A-Za-zÀ-ÿ\\- ]+$",
+            message = "Location must contain only letters, spaces, or hyphens"
+    )
     private final String location;
     private final String role;
     private final String email;

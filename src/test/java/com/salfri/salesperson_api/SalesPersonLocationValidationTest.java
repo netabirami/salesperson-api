@@ -18,7 +18,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SalesPersonNameValidationTest {
+public class SalesPersonLocationValidationTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -41,10 +41,10 @@ public class SalesPersonNameValidationTest {
         RestAssured.baseURI = "http://localhost:8080/sales";
     }
     @Test
-    void shouldReturnBadRequestForInvalidNullName() throws Exception {
+    void shouldReturnBadRequestForInvalidNullLocation() throws Exception {
         String invalidRequestBodyWithNullName = """
-            {
-                "location": "Berlin",
+            {   "name" : "Abirami",
+       
                 "role": "Developer",
                 "email": "test@example.com",
                 "mobileNumber": "1234567890",
@@ -75,16 +75,17 @@ public class SalesPersonNameValidationTest {
         String responseBody = response.getBody().asString();
         JsonNode json = objectMapper.readTree(responseBody);
 
-        String actualMessage = json.get("name").asText();
-        assertEquals("Name cannot be Null", actualMessage);
+        String actualMessage = json.get("location").asText();
+        assertEquals("Location cannot be Null", actualMessage);
     }
     @ParameterizedTest(name = "[{index}] name=\"{0}\" → expect: \"{1}\"")
-    @MethodSource("provideInvalidNames")
-    void shouldReturnBadRequestForInvalidName(String name, String expectedMessage) throws Exception {
+    @MethodSource("provideInvalidLocation")
+    void shouldReturnBadRequestForInvalidName(String location, String expectedMessage) throws Exception {
+
         String invalidRequestBody = String.format("""
             {
-                "name": "%s",
-                "location": "Berlin",
+                "name": "Abi",
+                "location": "%s",
                 "role": "Developer",
                 "email": "test@example.com",
                 "mobileNumber": "1234567890",
@@ -99,7 +100,7 @@ public class SalesPersonNameValidationTest {
                 "address": "Sample Address",
                 "photoUrl": "https://scbugit.com/images/test.png"
             }
-            """, name);
+            """, location);
 
         Response response = given()
                 .header("Content-Type", "application/json")
@@ -116,16 +117,17 @@ public class SalesPersonNameValidationTest {
         JsonNode json = objectMapper.readTree(responseBody);
 
         // Print for debugging
-        System.out.printf("Input name='%s' → Received message='%s'%n", name, json.get("name").asText());
+        System.out.printf("Input name='%s' → Received message='%s'%n", location, json.get("location").asText());
 
-        String actualMessage = json.get("name").asText();
+        String actualMessage = json.get("location").asText();
         assertEquals(expectedMessage, actualMessage);
     }
 
-    static Stream<Arguments> provideInvalidNames() {
+    static Stream<Arguments> provideInvalidLocation() {
         return Stream.of(
-                Arguments.of("@bi%%#", "Name must contain only letters and spaces"),
-                Arguments.of("A very very very very very very very long name long long long", "Name must be between 3 and 50 characters")
+                Arguments.of("@bi%%#", "Location must contain only letters, spaces, or hyphens"),
+                Arguments.of("A very very very very very very very long name long long long long location",
+                        "Location must be between 2 and 50 characters")
         );
     }
 }
