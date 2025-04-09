@@ -18,7 +18,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SalesPersonLocationValidationTest {
+public class SalesPersonEmailValidationTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -41,12 +41,12 @@ public class SalesPersonLocationValidationTest {
         RestAssured.baseURI = "http://localhost:8080/sales";
     }
     @Test
-    void shouldReturnBadRequestForInvalidNullLocation() throws Exception {
-        String invalidRequestBodyWithNullLocation = """
+    void shouldReturnBadRequestForInvalidNullEmail() throws Exception {
+        String invalidRequestBodyWithNullEmail = """
             {   "name" : "Abirami",
-       
+                 "location":"Germany",
                 "role": "Developer",
-                "email": "test@example.com",
+                
                 "mobileNumber": "1234567890",
                 "totalSalesCount": 10,
                 "joiningDate": "2025-01-01",
@@ -63,7 +63,7 @@ public class SalesPersonLocationValidationTest {
 
         Response response = given()
                 .header("Content-Type", "application/json")
-                .body(invalidRequestBodyWithNullLocation)
+                .body(invalidRequestBodyWithNullEmail)
                 .when()
                 .post()
                 .then()
@@ -75,19 +75,19 @@ public class SalesPersonLocationValidationTest {
         String responseBody = response.getBody().asString();
         JsonNode json = objectMapper.readTree(responseBody);
 
-        String actualMessage = json.get("location").asText();
-        assertEquals("Location cannot be Null", actualMessage);
+        String actualMessage = json.get("email").asText();
+        assertEquals("Should not be null", actualMessage);
     }
     @ParameterizedTest(name = "[{index}] name=\"{0}\" → expect: \"{1}\"")
-    @MethodSource("provideInvalidLocation")
-    void shouldReturnBadRequestForInvalidName(String location, String expectedMessage) throws Exception {
+    @MethodSource("provideInvalidEmail")
+    void shouldReturnBadRequestForInvalidGmail(String email, String expectedMessage) throws Exception {
 
         String invalidRequestBody = String.format("""
             {
                 "name": "Abi",
-                "location": "%s",
+                "location": "Germany",
                 "role": "Developer",
-                "email": "test@example.com",
+                "email": "%s",
                 "mobileNumber": "1234567890",
                 "totalSalesCount": 10,
                 "joiningDate": "2025-01-01",
@@ -100,7 +100,7 @@ public class SalesPersonLocationValidationTest {
                 "address": "Sample Address",
                 "photoUrl": "https://scbugit.com/images/test.png"
             }
-            """, location);
+            """, email);
 
         Response response = given()
                 .header("Content-Type", "application/json")
@@ -117,17 +117,18 @@ public class SalesPersonLocationValidationTest {
         JsonNode json = objectMapper.readTree(responseBody);
 
         // Print for debugging
-        System.out.printf("Input name='%s' → Received message='%s'%n", location, json.get("location").asText());
+        System.out.printf("Input name='%s' → Received message='%s'%n", email, json.get("email").asText());
 
-        String actualMessage = json.get("location").asText();
+        String actualMessage = json.get("email").asText();
         assertEquals(expectedMessage, actualMessage);
     }
 
-    static Stream<Arguments> provideInvalidLocation() {
+    static Stream<Arguments> provideInvalidEmail() {
         return Stream.of(
-                Arguments.of("@bi%%#", "Location must contain only letters, spaces, or hyphens"),
-                Arguments.of("A very very very very very very very long name long long long long location",
-                        "Location must be between 2 and 50 characters")
+                Arguments.of("@abi@gmailcom","Should match"),
+                Arguments.of("a@gl.cm",
+                        "Not longer than 100 chars and minimum 10"),
+                Arguments.of("","Should not be null")
         );
     }
 }

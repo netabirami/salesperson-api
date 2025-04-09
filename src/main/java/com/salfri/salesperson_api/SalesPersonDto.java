@@ -1,5 +1,6 @@
 package com.salfri.salesperson_api;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,7 +30,12 @@ public class SalesPersonDto {
             message = "Location must contain only letters, spaces, or hyphens"
     )
     private final String location;
+
     private final String role;
+
+    @NotBlank(message = "Should not be null")
+    @Size (min = 10,max = 100, message = "Not longer than 100 chars and minimum 10" )
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "Should match")
     private final String email;
     private final String mobileNumber;
     private final int totalSalesCount;
