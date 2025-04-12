@@ -42,7 +42,7 @@ public class SalespersonApiApplicationTest {
         // Step 1: Create a new Salesperson via POST
         String requestBody = "{\"name\":\"Abi\", " +
                 "\"location\":\"CHENNAI\", " +
-                "\"role\":\"SOFTWARE_QA_ENGINEER\",\"email\": \"updatedemail@example.com\",\"mobileNumber\":\"9876543210\",\"totalSalesCount\":100,\"joiningDate\":\"2025-01-12\"," +
+                "\"role\":\"SOFTWARE QA ENGINEER\",\"email\": \"updatedemail@example.com\",\"mobileNumber\":\"9876543210\",\"totalSalesCount\":100,\"joiningDate\":\"2025-01-12\"," +
                 "\"status\":\"ACTIVE\",\"totalRevenue\": 100000.75 ,\"departmentName\": \"General\",\"designation\": \"Sales Executive\",\"performanceRating\":4, \"gender\":\"OTHER\", " +
                 "\"address\":\"456 New Address, Chennai, India\",\"photoUrl\":\"https://scbugit.com/images/Abi123.png\"}";
 
@@ -94,7 +94,7 @@ public class SalespersonApiApplicationTest {
         assertEquals(createdId, id);
         assertEquals("Abi", name);
         assertEquals("CHENNAI", location);
-        assertEquals("SOFTWARE_QA_ENGINEER", role);
+        assertEquals("SOFTWARE QA ENGINEER", role);
         assertEquals("updatedemail@example.com",email);
         assertEquals("9876543210",mobileNumber);
         assertEquals(100,totalSalesCount);
