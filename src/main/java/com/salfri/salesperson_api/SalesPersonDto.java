@@ -31,9 +31,13 @@ public class SalesPersonDto {
     )
     private final String location;
 
+    @NotBlank(message = "Role cannot be null or empty")
+    @Size(min = 3, max = 50, message = "Role must be between 3 and 50 characters")
+    @Pattern(regexp = "^[A-Za-z][A-Za-z\\s\\-']{2,49}$",
+            message = "Role must start with a letter and contain only letters, spaces, hyphens, or apostrophes")
     private final String role;
 
-    @NotBlank(message = "Should not be null")
+    @NotBlank(message = "Email not be null")
     @Size (min = 10,max = 100, message = "Not longer than 100 chars and minimum 10" )
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "Should match")
     private final String email;

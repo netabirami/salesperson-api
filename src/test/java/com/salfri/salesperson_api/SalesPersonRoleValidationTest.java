@@ -18,7 +18,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SalesPersonEmailValidationTest {
+public class SalesPersonRoleValidationTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -41,12 +41,12 @@ public class SalesPersonEmailValidationTest {
         RestAssured.baseURI = "http://localhost:8080/sales";
     }
     @Test
-    void shouldReturnBadRequestForInvalidNullEmail() throws Exception {
-        String invalidRequestBodyWithNullEmail = """
+    void shouldReturnBadRequestForInvalidNullRole() throws Exception {
+        String invalidRequestBodyWithNullRole = """
             {   "name" : "Abirami",
                  "location":"Germany",
-                "role": "Developer",
                 
+                "email" :"abi@gmail.com",
                 "mobileNumber": "1234567890",
                 "totalSalesCount": 10,
                 "joiningDate": "2025-01-01",
@@ -63,7 +63,7 @@ public class SalesPersonEmailValidationTest {
 
         Response response = given()
                 .header("Content-Type", "application/json")
-                .body(invalidRequestBodyWithNullEmail)
+                .body(invalidRequestBodyWithNullRole)
                 .when()
                 .post()
                 .then()
@@ -75,19 +75,19 @@ public class SalesPersonEmailValidationTest {
         String responseBody = response.getBody().asString();
         JsonNode json = objectMapper.readTree(responseBody);
 
-        String actualMessage = json.get("email").asText();
-        assertEquals("Email not be null", actualMessage);
+        String actualMessage = json.get("role").asText();
+        assertEquals("Role cannot be null or empty", actualMessage);
     }
     @ParameterizedTest(name = "[{index}] name=\"{0}\" → expect: \"{1}\"")
-    @MethodSource("provideInvalidEmail")
-    void shouldReturnBadRequestForInvalidGmail(String email, String expectedMessage) throws Exception {
+    @MethodSource("provideInvalidRole")
+    void shouldReturnBadRequestForInvalidRole(String role, String expectedMessage) throws Exception {
 
-        String invalidRequestBodyEmail = String.format("""
+        String invalidRequestBody = String.format("""
             {
                 "name": "Abi",
                 "location": "Germany",
-                "role": "Developer",
-                "email": "%s",
+                "role": "%s",
+                "email": "abi@gmail.com",
                 "mobileNumber": "1234567890",
                 "totalSalesCount": 10,
                 "joiningDate": "2025-01-01",
@@ -100,11 +100,11 @@ public class SalesPersonEmailValidationTest {
                 "address": "Sample Address",
                 "photoUrl": "https://scbugit.com/images/test.png"
             }
-            """, email);
+            """, role);
 
         Response response = given()
                 .header("Content-Type", "application/json")
-                .body(invalidRequestBodyEmail)
+                .body(invalidRequestBody)
                 .when()
                 .post()
                 .then()
@@ -117,17 +117,16 @@ public class SalesPersonEmailValidationTest {
         JsonNode json = objectMapper.readTree(responseBody);
 
         // Print for debugging
-        System.out.printf("Input name='%s' → Received message='%s'%n", email, json.get("email").asText());
+        System.out.printf("Input name='%s' → Received message='%s'%n", role, json.get("role").asText());
 
-        String actualMessage = json.get("email").asText();
+        String actualMessage = json.get("role").asText();
         assertEquals(expectedMessage, actualMessage);
     }
 
-    static Stream<Arguments> provideInvalidEmail() {
+    static Stream<Arguments> provideInvalidRole() {
         return Stream.of(
-                Arguments.of("@abi@gmailcom","Should match"),
-                Arguments.of("a@gl.cm",
-                        "Not longer than 100 chars and minimum 10")
+                Arguments.of(" ","Role must be between 3 and 50 characters"),
+                Arguments.of("@12Manager", "Role must start with a letter and contain only letters, spaces, hyphens, or apostrophes")
         );
     }
 }
