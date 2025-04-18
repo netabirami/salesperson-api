@@ -18,7 +18,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SalesPersonRoleValidationTest {
+public class SalesPersonMobilePhoneValidationTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -41,13 +41,13 @@ public class SalesPersonRoleValidationTest {
         RestAssured.baseURI = "http://localhost:8080/sales";
     }
     @Test
-    void shouldReturnBadRequestForInvalidNullRole() throws Exception {
+    void shouldReturnBadRequestForInvalidNullMobileNumber() throws Exception {
         String invalidRequestBodyWithNullRole = """
             {   "name" : "Abirami",
                  "location":"Germany",
-                
+                "role":"General Manager",
                 "email" :"abi@gmail.com",
-                "mobileNumber": "1234567890",
+                
                 "totalSalesCount": 10,
                 "joiningDate": "2025-01-01",
                 "status": "ACTIVE",
@@ -75,20 +75,20 @@ public class SalesPersonRoleValidationTest {
         String responseBody = response.getBody().asString();
         JsonNode json = objectMapper.readTree(responseBody);
 
-        String actualMessage = json.get("role").asText();
-        assertEquals("Role cannot be null or empty", actualMessage);
+        String actualMessage = json.get("mobileNumber").asText();
+        assertEquals("Mobile number cannot be null or empty", actualMessage);
     }
     @ParameterizedTest(name = "[{index}] name=\"{0}\" → expect: \"{1}\"")
-    @MethodSource("provideInvalidRole")
-    void shouldReturnBadRequestForInvalidRole(String role, String expectedMessage) throws Exception {
+    @MethodSource("provideInvalidMobileNumber")
+    void shouldReturnBadRequestForInvalidRole(String mobileNumber, String expectedMessage) throws Exception {
 
         String invalidRequestBody = String.format("""
             {
                 "name": "Abi",
                 "location": "Germany",
-                "role": "%s",
+                "role": "General Manager",
                 "email": "abi@gmail.com",
-                "mobileNumber": "1234567890",
+                "mobileNumber": "%s",
                 "totalSalesCount": 10,
                 "joiningDate": "2025-01-01",
                 "status": "ACTIVE",
@@ -100,7 +100,7 @@ public class SalesPersonRoleValidationTest {
                 "address": "Sample Address",
                 "photoUrl": "https://scbugit.com/images/test.png"
             }
-            """, role);
+            """, mobileNumber);
 
         Response response = given()
                 .header("Content-Type", "application/json")
@@ -117,16 +117,22 @@ public class SalesPersonRoleValidationTest {
         JsonNode json = objectMapper.readTree(responseBody);
 
         // Print for debugging
-        System.out.printf("Input name='%s' → Received message='%s'%n", role, json.get("role").asText());
+        System.out.printf("Input name='%s' → Received message='%s'%n", mobileNumber, json.get("mobileNumber").asText());
 
-        String actualMessage = json.get("role").asText();
+        String actualMessage = json.get("mobileNumber").asText();
         assertEquals(expectedMessage, actualMessage);
     }
 
-    static Stream<Arguments> provideInvalidRole() {
+    static Stream<Arguments> provideInvalidMobileNumber() {
         return Stream.of(
-                Arguments.of("er","Role must be between 3 and 50 characters"),
-                Arguments.of("@12Manager", "Role must start with a letter and contain only letters, spaces, hyphens, or apostrophes")
+
+                Arguments.of("!23456", "Mobile number must contain only digits and can optionally " +
+                        "start with a '+'; length must be between 10 and 15 digits"),
+                Arguments.of("qwertjk", "Mobile number must contain only digits and can optionally " +
+                        "start with a '+'; length must be between 10 and 15 digits"),
+                Arguments.of("=1234567890", "Mobile number must contain only digits and can optionally " +
+                        "start with a '+'; length must be between 10 and 15 digits")
+
         );
     }
 }

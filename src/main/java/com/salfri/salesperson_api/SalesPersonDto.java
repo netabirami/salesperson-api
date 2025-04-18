@@ -41,6 +41,11 @@ public class SalesPersonDto {
     @Size (min = 10,max = 100, message = "Not longer than 100 chars and minimum 10" )
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "Should match")
     private final String email;
+
+    @NotBlank(message = "Mobile number cannot be null or empty")
+    @Pattern(regexp = "^(\\+?\\d{10,15})$", message =
+            "Mobile number must contain only digits and can optionally " +
+                    "start with a '+'; length must be between 10 and 15 digits")
     private final String mobileNumber;
     private final int totalSalesCount;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
