@@ -56,6 +56,8 @@ public class SalesPersonDto {
     private final String designation;
     private final Integer performanceRating;
     private final Gender gender;
+    @NotNull(message = "Address must not be null.")
+    @Size(min = 10, max = 255, message = "Address must be between 10 and 255 characters.")
     private final  String address;
     private final String photoUrl;
 
