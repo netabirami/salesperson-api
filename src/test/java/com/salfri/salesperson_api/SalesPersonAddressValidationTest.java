@@ -22,6 +22,7 @@ public class SalesPersonAddressValidationTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+
     @BeforeAll
     public static void waitForServer() {
         await()
