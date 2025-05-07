@@ -1,6 +1,7 @@
 package com.salfri.salesperson_api;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -55,7 +56,11 @@ public class SalesPersonDto {
     private final String departmentName;
     private final String designation;
     private final Integer performanceRating;
+
+    @Builder.Default
+    @NotNull(message = "Gender cannot be null")
     private final Gender gender;
+
     @NotNull(message = "Address must not be null.")
     @Size(min = 10, max = 255, message = "Address must be between 10 and 255 characters.")
     private final  String address;
