@@ -1,6 +1,6 @@
 package com.salfri.salesperson_api;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,10 +9,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 
 
 @Getter
@@ -48,6 +44,8 @@ public class SalesPersonDto {
             "Mobile number must contain only digits and can optionally " +
                     "start with a '+'; length must be between 10 and 15 digits")
     private final String mobileNumber;
+
+    @Min(value = 0, message = "Total sales count cannot be negative")
     private final int totalSalesCount;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private final LocalDate joiningDate;
